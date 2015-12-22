@@ -19,6 +19,14 @@ class TP_Controller extends CI_Controller {
         //$this->isInstall();
     }
 
+    public function NewTitle($page) {
+        switch ($page) {
+            case 'Configuration':
+                $this->data['config']->w_titulo = $this->data['config']->w_site_name . " - Configuracion del sitio";
+                break;
+        }
+    }
+
     private function isLoginUser() {
         @$this->data['tp_user'] = @$this->session->userdata('tp_user');
     }

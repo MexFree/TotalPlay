@@ -19,7 +19,7 @@ class Panel extends TP_Controller {
                     }
                 }
                 @$this->data['page'] = strtolower(@$this->data['page']);
-                //$this->NewTitle($page);
+                $this->NewTitle($page);
                 $this->load->view(Theme . "index", $this->data);
             }
         }
