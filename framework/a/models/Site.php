@@ -6,7 +6,6 @@
  */
 
 /**
- * Description of Site
  *
  * @author xlfederalelk0lx
  */
