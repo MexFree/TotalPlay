@@ -32,7 +32,7 @@
                                 <li><a href="/Movies"><span class="fa fa-film"></span>Peliculas</a></li>
                                 <li><a href="/Webs"><span class="fa fa-globe"></span>Web Amigas</a></li>
                                 <li><a href="/Advertising"><span class="fa fa-money"></span>Publicidad</a></li>
-                                <li><a href="/Config"><span class="fa fa-dashboard"></span>Configuracion</a></li>
+                                <li><a href="/Configuration"><span class="fa fa-dashboard"></span>Configuracion</a></li>
                                 <li role="separator" class="divider"></li>
                                 <?php
                             }
