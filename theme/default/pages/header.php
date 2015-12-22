@@ -21,11 +21,11 @@ Informes coil811122@icloud.com
         <meta name="googlebot-news" content="index,follow,all">
         <meta name="google" content="translate" />
 
-        <link type="text/css" rel="stylesheet" href="/theme/default/css/bootstrap.min.css" />
-        <link type="text/css" rel="stylesheet" href="/theme/default/css/main.css?v=<?= time() ?>" />
+        <link type="text/css" rel="stylesheet" href="<?=Theme?>css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="<?=Theme?>css/main.css?v=<?= time() ?>" />
 
-        <script type="text/javascript" src="/theme/default/js/jquery.min.js"></script>
-        <script type="text/javascript" src="/theme/default/js/main.js?v=<?= time(); ?>"></script>
+        <script type="text/javascript" src="<?=Theme?>js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?=Theme?>js/main.js?v=<?= time(); ?>"></script>
     </head>
     <body>
         <div class="container main">
