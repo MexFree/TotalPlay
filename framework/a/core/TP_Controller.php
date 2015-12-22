@@ -43,8 +43,8 @@ class TP_Controller extends CI_Controller {
 
     public function isInstall() {
         if (@$this->db->database == '') {
-            if (!defined("Theme")) {
-                define("Theme", "../../../theme/default/");
+            if (!defined("Pages")) {
+                define("Pages", "../../../theme/default/pages/");
             }
             @$this->data['config']->w_titulo = "Instalador by xlFederalElk0lx";
             @$this->data['config']->w_url = "http://" . $_SERVER['SERVER_NAME'];
