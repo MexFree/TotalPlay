@@ -6,7 +6,6 @@
  */
 
 /**
- * Description of User
  *
  * @author xlfederalelk0lx
  */
