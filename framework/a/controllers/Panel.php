@@ -14,7 +14,7 @@ class Panel extends TP_Controller {
                 if (@$this->data['config']->w_offline > 0) {
                     @$this->data['page'] = Pages . '404';
                 } else {
-                    if (@$page == 'Configuration') {
+                    if (@$page == 'Configuration' || @$page == 'Advertising') {
                         @$this->data['page'] = Modulo . "site/" . $page;
                     }
                 }

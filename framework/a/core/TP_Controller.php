@@ -24,6 +24,9 @@ class TP_Controller extends CI_Controller {
             case 'Configuration':
                 $this->data['config']->w_titulo = $this->data['config']->w_site_name . " - Configuracion del sitio";
                 break;
+            case 'Advertising':
+                $this->data['config']->w_titulo = $this->data['config']->w_site_name . " - Publicidad del sitio";
+                break;
         }
     }
 
@@ -41,6 +44,10 @@ class TP_Controller extends CI_Controller {
             @$query->w_imagen = @$query->w_url . "/favicon.png";
             @$this->data['config'] = $query;
             @$this->data['generos'] = $this->db->query("SELECT * FROM `ms_generos` ORDER BY `ms_generos`.`g_nombre` ASC");
+            $publi = $this->db->query("SELECT * FROM `ms_publicidad`");
+            foreach ($publi->result() as $row) {
+                @$this->data['publicidad'][$row->ad_key]=@$row->ad_code;
+            }
             define("Theme", "../../../theme/" . @$query->w_tema . "/");
             define("Modulo", "../../../theme/" . @$query->w_tema . "/modulos/");
             define("Pages", "../../../theme/" . @$query->w_tema . "/pages/");

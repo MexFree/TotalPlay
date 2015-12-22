@@ -15,6 +15,19 @@ class Site extends TP_Model {
         parent::__construct();
     }
 
+    public function Advertising() {
+        foreach ($_POST as $key => $value) {
+            $isPubli = $this->db->query("SELECT *  FROM `ms_publicidad` WHERE `ad_key` LIKE '" . $key . "'");
+            if ($isPubli->num_rows() > 0) {
+                $this->db->update('ms_publicidad', array("ad_code" => $value), array("ad_key" => $key));
+            } else {
+                $this->db->insert('ms_publicidad', array("ad_key" => $key, "ad_code" => $value));
+            }
+        }
+        $this->Alert("success", "datos actualizados", "check-circle");
+        $this->JS("location.reload();");
+    }
+
     public function Update() {
         $id = $_POST['w_id'];
         unset($_POST['w_id']);
