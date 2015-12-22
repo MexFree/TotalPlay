@@ -15,6 +15,19 @@ class Site extends TP_Model {
         parent::__construct();
     }
 
+    public function Update() {
+        $id = $_POST['w_id'];
+        unset($_POST['w_id']);
+        $this->db->set($_POST);
+        $this->db->where("w_id", $id);
+        if ($this->db->update('ms_config')) {
+            $this->Alert("success", "datos actualizados", "check-circle");
+            $this->JS("location.reload();");
+        } else {
+            $this->Alert("danger", "ocurrion un error al actualizar algun dato", "warning");
+        }
+    }
+
     public function Install() {
         if (filter_var(@$_POST['direccion'], FILTER_VALIDATE_URL)) {
             if (filter_var(@$_POST['email'], FILTER_VALIDATE_EMAIL) && filter_var(@$_POST['email_user'], FILTER_VALIDATE_EMAIL)) {

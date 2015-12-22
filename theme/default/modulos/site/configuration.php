@@ -1,10 +1,10 @@
 <div class="jumbotron box box-admin">
     <h1 class="page-header"><?= str_replace(@$config->w_site_name . " - ", '', @$config->w_titulo) ?></h1>
     <form data-api="site_update" data-res="api-site">
-        <input type="hidden" name="w_id" value="<?= @$config->w_id ?>" />
         <div class="input-group">
             <span class="input-group-addon">titulo</span>
             <input required class="form-control" value="<?= @$config->w_site_name ?>" name="w_titulo" placeholder="Nombre de tu página web" />
+            <input type="hidden" name="w_id" value="<?= @$config->w_id ?>" />
         </div>
         <div class="input-group">
             <span class="input-group-addon">eslogan</span>
