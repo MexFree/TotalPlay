@@ -14,13 +14,11 @@ class Panel extends TP_Controller {
                 if (@$this->data['config']->w_offline > 0) {
                     @$this->data['page'] = Pages . '404';
                 } else {
-                    if ($page == 'Login' || $page == 'YourAccount') {
-                        if (@$this->data['tp_user']->u_hash != '') {
-                            header("Location: /YourAccount");
-                        }
-                        $this->data['page'] = Modulo . "usuario/" . $page;
+                    if (@$page == 'Configuration') {
+                        @$this->data['page'] = Modulo . "site/" . $page;
                     }
                 }
+                @$this->data['page'] = strtolower(@$this->data['page']);
                 //$this->NewTitle($page);
                 $this->load->view(Theme . "index", $this->data);
             }
