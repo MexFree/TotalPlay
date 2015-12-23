@@ -15,6 +15,43 @@ class Site extends TP_Model {
         parent::__construct();
     }
 
+    public function Webdelete() {
+        if ($this->db->query("SELECT *  FROM `ms_links` WHERE `l_id` LIKE '" . @$_POST['l_id'] . "'")->num_rows() > 0) {
+            $this->db->query("DELETE FROM `ms_links` WHERE `l_id` = " . @$_POST['l_id'] . ";");
+            $this->Alert("success", "web amiga eliminada correctamente", "check-circle");
+            $this->JS("location.reload();");
+        } else {
+            $this->Alert("danger", "web amiga no existe", "warning");
+        }
+    }
+
+    public function Webedit() {
+        $id = $_POST['l_id'];
+        if ($this->db->query("SELECT *  FROM `ms_links` WHERE `l_id` LIKE '" . $id . "'")->num_rows() > 0) {
+            $this->db->set($_POST);
+            $this->db->where("l_id", $id);
+            $this->db->update('ms_links');
+            $this->Alert("success", "datos actualizados", "check-circle");
+            $this->JS("location.reload();");
+        } else {
+            $this->Alert("danger", "web amiga no existe", "warning");
+        }
+    }
+
+    public function Webadd() {
+        if (filter_var(@$_POST['l_url'], FILTER_VALIDATE_URL)) {
+            if ($this->db->query("SELECT *  FROM `ms_links` WHERE `l_url` LIKE '" . @$_POST['l_url'] . "'")->num_rows() > 0) {
+                $this->Alert("danger", "ya existe una web amiga registrada con esta url", "warning");
+            } else {
+                $this->db->insert("ms_links", $_POST);
+                $this->Alert("success", "web amiga agregada", "check-circle");
+                $this->JS("location.reload();");
+            }
+        } else {
+            $this->Alert("danger", "url invalida", "warning");
+        }
+    }
+
     public function Advertising() {
         foreach ($_POST as $key => $value) {
             $isPubli = $this->db->query("SELECT *  FROM `ms_publicidad` WHERE `ad_key` LIKE '" . $key . "'");

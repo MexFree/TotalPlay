@@ -16,9 +16,26 @@ $(function () {
     try {
         $("input")[0].focus();
     } catch (error) {
-        
+
     }
 });
+
+var Site = {
+    WebEdit: function (id, name, url, online) {
+        $("#l_name").val(name);
+        $("#l_url").val(unescape(url));
+        $("#l_online").val(online);
+        $("#l_id").val(id);
+        $("#fg").data("api", "site_webedit");
+        $(".btn-inverse").html("Actualizar");
+        $(".btn-danger").css("display", "inline-block");
+    },
+    WebDelete: function (id) {
+        $("#fg").html('<input type="hidden" name="l_id" value="' + id + '" />');
+        $("#fg").data("api", "site_webdelete");
+        $("#fg").submit();
+    }
+}
 
 function Curl(form) {
     try {
