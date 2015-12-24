@@ -33,6 +33,9 @@ class TP_Controller extends CI_Controller {
              case 'movies':
                 $this->data['config']->w_titulo = $this->data['config']->w_site_name . " - Administracion de Peliculas";
                 break;
+            case 'Videos':
+                $this->data['config']->w_titulo = $this->data['config']->w_site_name . " - Reproductores de ";
+                break;
         }
     }
 
