@@ -30,6 +30,9 @@ class TP_Controller extends CI_Controller {
             case 'Webs':
                 $this->data['config']->w_titulo = $this->data['config']->w_site_name . " - Webs amigas";
                 break;
+             case 'movies':
+                $this->data['config']->w_titulo = $this->data['config']->w_site_name . " - Administracion de Peliculas";
+                break;
         }
     }
 

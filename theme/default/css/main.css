@@ -21,6 +21,34 @@ form{
     text-align: right;
 }
 
+#fg,#caratula{
+    display: none;
+}
+fieldset{
+    height: 235px;
+    border: 1px solid #000;
+    margin-top: 5px;
+    border-radius: 4px;
+    max-height: 235px;
+    text-align: center;
+}
+legend{
+    font-size: 14px;
+    padding: 0px 5px;
+    margin: 0px;
+    border: none;
+    color: #000;
+    width: auto;
+    text-align: center;
+}
+.row{
+    margin-left: 1px;
+    margin-right: 1px;
+}
+.col-sm-8{
+    padding-left: 0px;
+}
+
 .fa{
     margin-right: 5px;
 }
@@ -180,6 +208,7 @@ table.dataTable thead tr th, table.dataTable tbody tr td a .fa-trash{
 table.dataTable thead tr th{
     border-bottom: 1px solid #000;
     color: #fff;
+    cursor: pointer;
 }
 .dataTables_wrapper .dataTables_paginate {
     border-top: 1px solid #000;

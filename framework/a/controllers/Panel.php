@@ -16,6 +16,10 @@ class Panel extends TP_Controller {
                 } else {
                     if (@$page == 'Configuration' || @$page == 'Advertising' || @$page == 'Webs') {
                         @$this->data['page'] = Modulo . "site/" . $page;
+                    } elseif ($page == 'Movies') {
+                        $page = ($this->uri->segment(2) == '') ? "movies" : $this->uri->segment(2);
+                        $this->data['movies'] = $this->db->query("SELECT * FROM  `ms_peliculas` ORDER BY `p_titulo` ASC");
+                        @$this->data['page'] = Modulo . "movie/" . $page;
                     }
                 }
                 @$this->data['page'] = strtolower(@$this->data['page']);

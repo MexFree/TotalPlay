@@ -7,7 +7,7 @@
 $(function () {
     $("form").submit(function () {
         try {
-            Curl(this);
+            TotalPlay.Curl(this);
         } catch (error) {
             alert(error);
         }
@@ -37,35 +37,75 @@ var Site = {
     }
 }
 
-function Curl(form) {
-    try {
-        var api = $(form).data('api');
-        if (api != '') {
-            var formData = new FormData(form);
-            var res = $(form).data('res');
-            if (res == '' || res == undefined) {
-                res = ".api-gral";
+var Movie = {
+    TableMovie: function () {
+        $("#movie_table").dataTable({
+            'searching': true,
+            "order": [[1, "asc"]],
+            stateSave: true
+        });
+        $(".paginate_button_add").click(function () {
+            $(".page-header").html("Agregar pelicula");
+            $(".listado").hide("slow", function () {
+                $("#fg").show("slow");
+                $("#fg").data("api", "movie_add");
+                $("input")[0].focus();
+            })
+        });
+        $(".btn-danger").click(function () {
+            location.reload();
+        });
+        $(".btn-primary").click(function () {
+            $("#caratula").click();
+        });
+    },
+    Update: function (json) {
+        $.each(json, function (key, value) {
+            if (key != 'p_date' && key != 'p_seo' && key != 'p_hits' && key != 'p_votos' && key != 'p_reports') {
+                $("#" + key).val(value);
             }
-            var metodo = $(form).data('metodo');
-            if (metodo == '' || metodo == undefined) {
-                metodo = "post";
+        });
+        $("fieldset").html('<img src="/files/uploads/' + json.p_id + '.jpg" height="235" width="192" />');
+        $(".page-header").html("Actualizar pelicula");
+        $(".listado").hide("slow", function () {
+            $("#fg").show("slow");
+            $("#fg").data("api", "movie_update");
+            $("input")[0].focus();
+        });
+    }
+}
+
+var TotalPlay = {
+    Curl: function (form) {
+        try {
+            var api = $(form).data('api');
+            if (api != '') {
+                var formData = new FormData(form);
+                var res = $(form).data('res');
+                if (res == '' || res == undefined) {
+                    res = ".api-gral";
+                }
+                var metodo = $(form).data('metodo');
+                if (metodo == '' || metodo == undefined) {
+                    metodo = "post";
+                }
+                $("." + res).html('<h5 class="fa fa-spinner fa-pulse fa-fw margin-bottom"></h5>Procesando Peticion');
+                $.ajax({
+                    type: metodo,
+                    url: "/api/" + api,
+                    enctype: 'multipart/form-data',
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                }).done(function (data) {
+                    $("." + res).html(data);
+                }).fail(function () {
+                    $("." + res).html('<div class="alert alert-danger" role=alert> <strong><span class="fa fa-warning"></span></strong>Error no se logro encontrar el recurso solicitado. </div>');
+                });
             }
-            $("." + res).html('<h5 class="fa fa-spinner fa-pulse fa-fw margin-bottom"></h5>Procesando Peticion');
-            $.ajax({
-                type: metodo,
-                url: "/api/" + api,
-                enctype: 'multipart/form-data',
-                data: formData,
-                cache: false,
-                contentType: false,
-                processData: false
-            }).done(function (data) {
-                $("." + res).html(data);
-            }).fail(function () {
-                $("." + res).html('<div class="alert alert-danger" role=alert> <strong><span class="fa fa-warning"></span></strong>Error no se logro encontrar el recurso solicitado. </div>');
-            });
+        } catch (error) {
+            alert(error);
         }
-    } catch (error) {
-        alert(error);
     }
 }
