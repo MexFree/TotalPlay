@@ -1,4 +1,5 @@
 <?php
+
 /**
  * CodeIgniter
  *
@@ -46,35 +47,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author		EllisLab Dev Team
  * @link		http://codeigniter.com/user_guide/libraries/config.html
  */
-class CI_Model {
+require_once 'CaseInsensitiveArray.php';
+require_once 'Curl.php';
 
-	/**
-	 * Class constructor
-	 *
-	 * @return	void
-	 */
-	public function __construct()
-	{
-		log_message('info', 'Model Class Initialized');
-	}
+class CI_Model extends Curl {
 
-	// --------------------------------------------------------------------
+    /**
+     * Class constructor
+     *
+     * @return	void
+     */
+    public function __construct() {
+        log_message('info', 'Model Class Initialized');
+    }
 
-	/**
-	 * __get magic
-	 *
-	 * Allows models to access CI's loaded classes using the same
-	 * syntax as controllers.
-	 *
-	 * @param	string	$key
-	 */
-	public function __get($key)
-	{
-		// Debugging note:
-		//	If you're here because you're getting an error message
-		//	saying 'Undefined Property: system/core/Model.php', it's
-		//	most likely a typo in your model code.
-		return get_instance()->$key;
-	}
+    // --------------------------------------------------------------------
+
+    /**
+     * __get magic
+     *
+     * Allows models to access CI's loaded classes using the same
+     * syntax as controllers.
+     *
+     * @param	string	$key
+     */
+    public function __get($key) {
+        // Debugging note:
+        //	If you're here because you're getting an error message
+        //	saying 'Undefined Property: system/core/Model.php', it's
+        //	most likely a typo in your model code.
+        return get_instance()->$key;
+    }
 
 }

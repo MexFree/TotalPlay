@@ -22,7 +22,7 @@ class Panel extends TP_Controller {
                         if ($page == 'Videos') {
                             if ($this->uri->segment(3) != '') {
                                 $this->data['movie'] = $this->db->query("SELECT *  FROM `ms_peliculas` WHERE `p_id` = " . $this->uri->segment(3))->row();
-                                $this->data['movie_videos'] = $this->db->query("SELECT *  FROM `ms_videos` WHERE `p_id` = " . $this->uri->segment(3));
+                                $this->data['videos'] = $this->db->query("SELECT *  FROM `ms_videos` WHERE `p_id` = " . $this->uri->segment(3));
                                 if (@$this->data['movie']->p_id == '') {
                                     header("Location: /Movies");
                                 }

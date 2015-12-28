@@ -12,6 +12,67 @@
  */
 class Movie extends TP_Model {
 
+    public function Videodelete() {
+        $isVideos = $this->db->query("SELECT *  FROM `ms_videos` WHERE `v_id` = " . $_POST['v_id'] . " AND `p_id` = " . $_POST['p_id']);
+        if ($isVideos->num_rows() > 0) {
+            if ($this->db->query("DELETE FROM `ms_videos` WHERE `v_id` = " . $_POST['v_id'] . ";")) {
+                $this->Alert("success", "reproductor eliminado correctamente", "check-circle");
+                $this->JS("window.location.href='/Movies/Videos/" . $_POST['p_id'] . "';");
+            } else {
+                $this->Alert("danger", "Ocurrio un error: " . $this->db->error()['message'], "warning");
+            }
+        } else {
+            $this->Alert("danger", "Ocurrio un error: " . $this->db->error()['message'], "warning");
+        }
+    }
+
+    public function Videoedit() {
+        $isVideos = $this->db->query("SELECT *  FROM `ms_videos` WHERE `v_id` = " . $_POST['v_id'] . " AND `p_id` = " . $_POST['p_id']);
+        if ($isVideos->num_rows() > 0) {
+            $id = $_POST['v_id'];
+            unset($_POST['v_id']);
+            unset($_POST['p_id']);
+            $this->db->set($_POST);
+            $this->db->where("v_id", $id);
+            if ($this->db->update('ms_videos')) {
+                $this->Alert("success", "datos actualizados correctamente", "check-circle");
+                $this->JS("location.reload();");
+            } else {
+                $this->Alert("danger", "Ocurrio un error: " . $this->db->error()['message'], "warning");
+            }
+        } else {
+            $this->Alert("danger", "Ocurrio un error: " . $this->db->error()['message'], "warning");
+        }
+    }
+
+    public function Videoadd() {
+        if ($this->db->insert("ms_videos", $_POST)) {
+            $this->Alert("success", "video agregado correctamente", "check-circle");
+            $this->JS("$('form')[0].reset(); $(\"input\")[0].focus();");
+        } else {
+            $this->Alert("danger", "Ocurrio un error: " . $this->db->error()['message'], "warning");
+        }
+    }
+
+    public function Delete() {
+        $isMovie = $this->db->query("SELECT *  FROM `ms_peliculas` WHERE `p_id` = " . $_POST['p_id']);
+        if ($isMovie->num_rows() > 0) {
+            $isVideos = $this->db->query("SELECT *  FROM `ms_videos` WHERE `p_id` = " . $_POST['p_id']);
+            if ($isVideos->num_rows() > 0) {
+                $this->Alert("danger", "no puedes eliminar esta pelicula tiene " . $isVideos->num_rows() . " reproductores asignados", "warning");
+            } else {
+                if ($this->db->query("DELETE FROM `ms_peliculas` WHERE `p_id` = " . $_POST['p_id'] . ";")) {
+                    $this->Alert("success", "pelicula eliminada correctamente", "check-circle");
+                    $this->JS("location.reload();");
+                } else {
+                    $this->Alert("danger", "Ocurrio un error: " . $this->db->error()['message'], "warning");
+                }
+            }
+        } else {
+            $this->Alert("danger", "pelicula no encontrada", "warning");
+        }
+    }
+
     public function Update() {
         if (@$_POST['p_id'] != '' && filter_var($_POST['p_id'], FILTER_VALIDATE_INT)) {
             $isMovie = $this->db->query("SELECT *  FROM `ms_peliculas` WHERE `p_id` = " . $_POST['p_id']);

@@ -116,7 +116,7 @@
                                 <a title="Ver Pelicula" target="_blank" href="/ver/pelicula-<?= $row->p_id ?>-<?= $row->p_seo ?>-<?= $row->p_ano ?>-online.html"><span class="fa fa-eye"></span></a>
                                 <a title="Editar Pelicula" onclick="Movie.Update(<?= $this->Master->Jsonencode($row) ?>)" href="javascript:void(0);"><span class="fa fa-edit"></span></a>
                                 <a title="Reproductores de Pelicula" href="/Movies/Videos/<?= $row->p_id ?>"><span class="fa fa-play-circle-o"></span></a>
-                                <a onclick="$('#p_id').val('<?= @$row->p_id ?>'); $('#general').submit()" title="Eliminar Pelicula" href="javascript:void(0)"><span class="fa fa-trash"></span></a>
+                                <a onclick="Movie.Delete('<?= @$row->p_id ?>');" title="Eliminar Pelicula" href="javascript:void(0)"><span class="fa fa-trash"></span></a>
                             </td>
                         </tr>
                         <?php

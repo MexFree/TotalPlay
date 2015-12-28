@@ -38,6 +38,23 @@ var Site = {
 }
 
 var Movie = {
+    TableVideos: function (titulo, id) {
+        $("#movie_table").dataTable({
+            'searching': true,
+            "order": [[1, "asc"]],
+            stateSave: true
+        });
+        $(".paginate_button_add").click(function () {
+            $(".page-header").html(titulo + ": Agregar reproductor");
+            $(".listado").hide("slow", function () {
+                $("#fg").show("slow");
+                $("#fg").data("api", "movie_videoadd");
+            })
+        });
+        $(".btn-danger").click(function () {
+            window.location.href = '/Movies/Videos/' + id;
+        });
+    },
     TableMovie: function () {
         $("#movie_table").dataTable({
             'searching': true,
@@ -58,6 +75,29 @@ var Movie = {
         $(".btn-primary").click(function () {
             $("#caratula").click();
         });
+    },
+    VideosUpdate: function (json) {
+        $.each(json, function (key, value) {
+            $("#" + key).val(value);
+        });
+        $(".page-header").html("Actualizar Reproductor");
+        $(".listado").hide("slow", function () {
+            $("#fg").show("slow");
+            $("#fg").data("api", "movie_videoedit");
+            $("input")[0].focus();
+            $(".btn-inverse").html("Actualizar");
+        });
+    },
+    VideosDelete: function (v_id, p_id) {
+        $("#fg").data("api", "movie_videodelete");
+        $("#fg").html('<input type="hidden" name="v_id" value="' + v_id + '"/>');
+        $("#fg").append('<input type="hidden" name="p_id" value="' + p_id + '"/>');
+        $("#fg").submit();
+    },
+    Delete: function (p_id) {
+        $("#fg").data("api", "movie_delete");
+        $("#fg").append('<input type="hidden" name="p_id" value="' + p_id + '"/>');
+        $("#fg").submit();
     },
     Update: function (json) {
         $.each(json, function (key, value) {
@@ -89,7 +129,7 @@ var TotalPlay = {
                 if (metodo == '' || metodo == undefined) {
                     metodo = "post";
                 }
-                $("." + res).html('<h5 class="fa fa-spinner fa-pulse fa-fw margin-bottom"></h5>Procesando Peticion');
+                $("." + res).html('<center><h5><img src="data:image/gif;base64,R0lGODlhEAAQAIABAAAAAP///yH/C05FVFNDQVBFMi4wAwEAAAAh+QQJCgABACwAAAAAEAAQAAACHYyPqcvtD6M0oAJo78vYzsOFXiBW5Fhe3GmmX1AAACH5BAkKAAEALAAAAAAQABAAAAIcjI+py+0PowIUwGofvlXKDXZBSI0iaW1miXpGAQAh+QQJCgABACwAAAAAEAAQAAACH4yPacCg2txDcdJms62aZ79h2ngxAXhU6IKtZyuSTwEAIfkECQoAAQAsAAAAABAAEAAAAiCMj2nAEO0UfE1RdmOa03rbfZm4VGRIpiV2miLqwepXAAAh+QQJCgABACwAAAAAEAAQAAACHoyPacAQ7eBqj8rKcKS6XwUeX9iRU2aW6cq27guDBQAh+QQJCgABACwAAAAAEAAQAAACHoyPacAQ7eBqj8rKcKS6XwWGySeSoQmi4sq27guDBQAh+QQJCgABACwAAAAAEAAQAAACHoyPqQEN7JZ7U8aqKl68m92BnGg13lk+J5lFq4seBQAh+QQJCgABACwAAAAAEAAQAAACHoyPqQoNm9yDR9Lqrl5W9/tR4cZlo2GdQZoxZksaBQA7" /></h5></center>');
                 $.ajax({
                     type: metodo,
                     url: "/api/" + api,
