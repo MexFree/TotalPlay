@@ -15,6 +15,12 @@ class Site extends TP_Model {
         parent::__construct();
     }
 
+    public function Search() {
+        if (@$_POST['q'] != '') {
+            $this->JS("window.location.href='/buscar/" . urlencode($_POST['q']) . "';");
+        }
+    }
+
     public function Webdelete() {
         if ($this->db->query("SELECT *  FROM `ms_links` WHERE `l_id` LIKE '" . @$_POST['l_id'] . "'")->num_rows() > 0) {
             $this->db->query("DELETE FROM `ms_links` WHERE `l_id` = " . @$_POST['l_id'] . ";");

@@ -12,8 +12,8 @@
  */
 class TP_Model extends CI_Model {
 
-    public function __construct() {
-        parent::__construct();
+    public function __construct($base_url = null) {
+        parent::__construct($base_url);
     }
 
     public function JS($codigo) {
@@ -35,6 +35,14 @@ class TP_Model extends CI_Model {
         $repl = array('', '-', '');
         $url = preg_replace($find, $repl, $url);
         return $url;
+    }
+
+    public function cut_str($str, $left, $right) {
+        $str = substr(stristr($str, $left), strlen($left));
+        $leftLen = strlen(stristr($str, $right));
+        $leftLen = $leftLen ? -($leftLen) : strlen($str);
+        $str = substr($str, 0, $leftLen);
+        return $str;
     }
 
     public function UploadImg($base_name, $new_height = 0, $new_width = 0, $path = './files/uploads/') {

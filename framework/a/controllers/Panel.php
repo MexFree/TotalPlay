@@ -31,6 +31,30 @@ class Panel extends TP_Controller {
                             }
                         }
                         @$this->data['page'] = Modulo . "movie/" . $page;
+                    } elseif ($page == 'home') {
+                        $this->data['peliculas' . date("Y")] = $this->db->query("SELECT * FROM `ms_peliculas` WHERE  `p_ano` =" . date("Y") . " ORDER BY `p_date` DESC LIMIT 0 , 30");
+                        $this->data['peliculas'] = $this->db->query("SELECT * FROM `ms_peliculas` ORDER BY RAND() LIMIT 30");
+                        $limit = ($this->uri->segment(2) == '') ? 0 : ($this->uri->segment(2) - 1) * 30;
+                        $this->data['recientes'] = $this->db->query("SELECT * FROM  `ms_peliculas` ORDER BY `p_date` DESC LIMIT " . $limit . " , 30");
+                        $this->data['top20'] = $this->db->query("SELECT * FROM  `ms_peliculas` ORDER BY `p_hits` DESC LIMIT 0 , 20");
+                    } elseif ($page == 'search') {
+                        $item = $this->uri->segment(1);
+                        $limit = ($this->uri->segment(3) == '') ? 0 : ($this->uri->segment(3) - 1) * 30;
+                        if ($item == 'genero') {
+                            $this->data['search'] = $this->db->query("SELECT *  FROM `ms_generos` WHERE `g_seo` LIKE '" . $this->uri->segment(2) . "'")->row();
+                            if (@$this->data['search']->g_id != '') {
+                                @$this->data['search']->titulo = 'Peliculas de ' . @$this->data['search']->g_nombre;
+                                $this->data['recientes'] = $this->db->query("SELECT * FROM  `ms_peliculas` WHERE  `p_genero` =" . @$this->data['search']->g_id . " ORDER BY `p_date` DESC LIMIT " . $limit . " , 30");
+                            }
+                        } else if ($item == 'year') {
+                            @$this->data['search']->p_ano = $this->uri->segment(2);
+                            @$this->data['search']->titulo = 'Peliculas del Año ' . $this->uri->segment(2);
+                            $this->data['recientes'] = $this->db->query("SELECT * FROM  `ms_peliculas` WHERE  `p_ano` =" . $this->uri->segment(2) . " ORDER BY `p_date` DESC LIMIT " . $limit . " , 30");
+                        } else if ($item == 'buscar') {
+                            @$this->data['search']->p_titulo = urldecode($this->uri->segment(2));
+                            @$this->data['search']->titulo = 'Peliculas con ' . urldecode($this->uri->segment(2));
+                            $this->data['recientes'] = $this->db->query("SELECT *  FROM `ms_peliculas` WHERE `p_titulo` LIKE '%" . urldecode($this->uri->segment(2)) . "%' ORDER BY `p_date` DESC LIMIT " . $limit . " , 30");
+                        }
                     }
                 }
                 @$this->data['page'] = strtolower(@$this->data['page']);

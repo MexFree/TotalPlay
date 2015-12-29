@@ -7,7 +7,7 @@
 $(function () {
     $("form").submit(function () {
         try {
-            TotalPlay.Curl(this);
+            return TotalPlay.Curl(this);
         } catch (error) {
             alert(error);
         }
@@ -15,6 +15,11 @@ $(function () {
     });
     try {
         $("input")[0].focus();
+    } catch (error) {
+
+    }
+    try {
+        $(".nano").nanoScroller();
     } catch (error) {
 
     }
@@ -116,10 +121,22 @@ var Movie = {
 }
 
 var TotalPlay = {
+    CreateJCarousel: function (name) {
+        $('.' + name).jcarousel({
+            wrap: 'circular'
+        });
+        $('.' + name + '-prev').jcarouselControl({
+            target: '-=2'
+        });
+
+        $('.' + name + '-next').jcarouselControl({
+            target: '+=2'
+        });
+    },
     Curl: function (form) {
         try {
             var api = $(form).data('api');
-            if (api != '') {
+            if (api != '' && api != undefined) {
                 var formData = new FormData(form);
                 var res = $(form).data('res');
                 if (res == '' || res == undefined) {
@@ -143,6 +160,9 @@ var TotalPlay = {
                 }).fail(function () {
                     $("." + res).html('<div class="alert alert-danger" role=alert> <strong><span class="fa fa-warning"></span></strong>Error no se logro encontrar el recurso solicitado. </div>');
                 });
+                return false;
+            } else {
+                return true;
             }
         } catch (error) {
             alert(error);

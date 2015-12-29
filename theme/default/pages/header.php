@@ -22,11 +22,13 @@ Informes coil811122@icloud.com
         <meta name="google" content="translate" />
 
         <link type="text/css" rel="stylesheet" href="<?=Theme?>css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="<?=Theme?>css/nanoscroller.css" />
         <link type="text/css" rel="stylesheet" href="<?=Theme?>css/main.css?v=<?= time() ?>" />
 
         <script type="text/javascript" src="<?=Theme?>js/jquery.min.js"></script>
         <script type="text/javascript" src="<?=Theme?>js/main.js?v=<?= time(); ?>"></script>
     </head>
     <body>
+        <div class="api-gral"></div>
         <div class="container main">
         <?php $this->load->view(Pages . "navbar-top"); ?>

@@ -1,0 +1,44 @@
+/*
+Proyecto progamado por xlFederalElk0lx.
+Informes coil811122@icloud.com
+*/
+/* 
+    Created on : 29/12/2015, 12:49:32 AM
+    Author     : xlfederalelk0lx
+*/
+
+.jcarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+.jcarousel ul {
+    width: 20000em;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.jcarousel li {
+    float: left;
+}
+
+.jcarousel ul li .info{
+    min-height: 190px;
+    padding: 0px 7px;
+}
+
+.jcarousel ul li .info img{
+    height: 152px;
+    max-height: 152px;
+    width: 109px;
+    max-width: 109px;
+    border-radius: 2px;
+}
+.jcarousel ul li .info h5{
+    font-size: 12px;
+    font-weight: normal;
+    color: #fff;
+    margin: 7px 0px 3px 0px;
+}

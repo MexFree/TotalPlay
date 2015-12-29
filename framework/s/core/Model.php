@@ -57,8 +57,8 @@ class CI_Model extends Curl {
      *
      * @return	void
      */
-    public function __construct() {
-        log_message('info', 'Model Class Initialized');
+    public function __construct($base_url = null) {
+        parent::__construct($base_url);
     }
 
     // --------------------------------------------------------------------
