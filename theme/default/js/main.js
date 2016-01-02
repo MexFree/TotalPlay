@@ -133,6 +133,16 @@ var TotalPlay = {
             target: '+=2'
         });
     },
+    Post: function (api, post, res) {
+        if (res == '' || res == undefined) {
+            res = "api-gral";
+        }
+        $.post("/api/" + api, post).done(function (data) {
+            $("." + res).html(data);
+        }).fail(function () {
+            alert("error en el recurso");
+        });
+    },
     Curl: function (form) {
         try {
             var api = $(form).data('api');

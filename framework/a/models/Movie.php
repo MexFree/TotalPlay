@@ -12,7 +12,12 @@
  */
 class Movie extends TP_Model {
 
+    public function __construct($base_url = null) {
+        parent::__construct($base_url);
+    }
+
     public function Videodelete() {
+        $this->isLoginUser();
         $isVideos = $this->db->query("SELECT *  FROM `ms_videos` WHERE `v_id` = " . $_POST['v_id'] . " AND `p_id` = " . $_POST['p_id']);
         if ($isVideos->num_rows() > 0) {
             if ($this->db->query("DELETE FROM `ms_videos` WHERE `v_id` = " . $_POST['v_id'] . ";")) {
@@ -27,6 +32,7 @@ class Movie extends TP_Model {
     }
 
     public function Videoedit() {
+        $this->isLoginUser();
         $isVideos = $this->db->query("SELECT *  FROM `ms_videos` WHERE `v_id` = " . $_POST['v_id'] . " AND `p_id` = " . $_POST['p_id']);
         if ($isVideos->num_rows() > 0) {
             $id = $_POST['v_id'];
@@ -46,6 +52,7 @@ class Movie extends TP_Model {
     }
 
     public function Videoadd() {
+        $this->isLoginUser();
         if ($this->db->insert("ms_videos", $_POST)) {
             $this->Alert("success", "video agregado correctamente", "check-circle");
             $this->JS("$('form')[0].reset(); $(\"input\")[0].focus();");
@@ -55,6 +62,7 @@ class Movie extends TP_Model {
     }
 
     public function Delete() {
+        $this->isLoginUser();
         $isMovie = $this->db->query("SELECT *  FROM `ms_peliculas` WHERE `p_id` = " . $_POST['p_id']);
         if ($isMovie->num_rows() > 0) {
             $isVideos = $this->db->query("SELECT *  FROM `ms_videos` WHERE `p_id` = " . $_POST['p_id']);
@@ -74,6 +82,7 @@ class Movie extends TP_Model {
     }
 
     public function Update() {
+        $this->isLoginUser();
         if (@$_POST['p_id'] != '' && filter_var($_POST['p_id'], FILTER_VALIDATE_INT)) {
             $isMovie = $this->db->query("SELECT *  FROM `ms_peliculas` WHERE `p_id` = " . $_POST['p_id']);
             if ($isMovie->num_rows() > 0) {
@@ -102,6 +111,7 @@ class Movie extends TP_Model {
     }
 
     public function Add() {
+        $this->isLoginUser();
         foreach ($_POST as $key => $value) {
             $_POST[$key] = strtolower($value);
         }
@@ -128,8 +138,37 @@ class Movie extends TP_Model {
         }
     }
 
-    public function Remote(){
-        $_POST['datos']=  json_decode(base64_decode($_POST['datos']));
+    public function Like() {
+        if (!$_COOKIE['movie_like_' . $_POST['id']]) {
+            $votos = $this->db->query("select p_votos from ms_peliculas where p_id like " . $_POST['id'])->row();
+            setcookie('movie_like_' . $_POST['id'], TRUE, time() + 7776000, '/');
+            $this->db->set(array("p_votos" => ($votos->p_votos + 1)));
+            $this->db->where("p_id", $_POST['id']);
+            if ($this->db->update('ms_peliculas')) {
+                $this->Alert("success", "tu voto se ha contado", "check-circle");
+                $this->JS('$(".p_votos").html("' . ($votos->p_votos + 1) . '");');
+            }
+        } else {
+            $this->Alert("danger", "ya has votado", "check-circle");
+        }
+    }
+
+    public function Report() {
+        if (!$_COOKIE['movie_report_' . $_POST['id']]) {
+            setcookie('movie_report_' . $_POST['id'], TRUE, time() + 7776000, '/');
+            $this->db->set(array("p_reports" => 1));
+            $this->db->where("p_id", $_POST['id']);
+            if ($this->db->update('ms_peliculas')) {
+                $this->Alert("success", "tu reporte se ha registrado", "check-circle");
+            }
+        } else {
+            $this->Alert("danger", "ya la has reportado", "check-circle");
+        }
+    }
+
+    public function Remote() {
+        $_POST['datos'] = json_decode(base64_decode($_POST['datos']));
         print_r(@$_POST['datos']);
     }
+
 }

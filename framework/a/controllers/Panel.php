@@ -60,8 +60,9 @@ class Panel extends TP_Controller {
                         $year = $seo[sizeof($seo) - 1];
                         unset($seo[sizeof($seo) - 1]);
                         $seo = implode("-", $seo);
-                        $this->data['movie'] = $this->db->query("SELECT *  FROM  `ms_generos`,`ms_peliculas` WHERE `ms_generos`.`g_id` LIKE `ms_peliculas`.`p_genero` AND `ms_peliculas`.`p_seo` LIKE '" . $seo . "' AND `ms_peliculas`.`p_ano` = " . $year)->row();
-                        if (@$this->data['movie']->p_id != '') {
+                        $this->data['movie'] = $this->db->query("SELECT *  FROM  `ms_generos`,`ms_peliculas` WHERE `ms_generos`.`g_id` LIKE `ms_peliculas`.`p_genero` AND `ms_peliculas`.`p_seo` LIKE '" . $seo . "' AND `ms_peliculas`.`p_ano` = " . $year);
+                        if ($this->data['movie']->num_rows() > 0) {
+                            $this->data['movie']=$this->data['movie']->row();
                             @$this->data['movie']->p_hits = @$this->data['movie']->p_hits + 1;
                             $this->db->query("UPDATE `ms_peliculas` SET  `p_hits` =  '" . @$this->data['movie']->p_hits . "' WHERE `p_id` =" . @$this->data['movie']->p_id . ";");
                             @$this->data['videos'] = $this->db->query("SELECT *  FROM `ms_videos` WHERE `p_id` = " . $this->data['movie']->p_id . " ORDER BY `v_titulo` ASC ");
@@ -69,10 +70,15 @@ class Panel extends TP_Controller {
                             @$this->data['config']->w_titulo = ucwords(@$this->data['movie']->p_titulo) . " - " . @$this->data['config']->w_site_name;
                             @$this->data['config']->w_descripcion = @$this->data['movie']->p_sinopsis;
                             @$this->data['config']->w_url.="/ver/" . $this->data['movie']->p_seo . "-" . $this->data['movie']->p_ano . "-online.html";
+                        } else {
+                            @$this->data['page'] = Pages . "e404";
                         }
                     }
                 }
                 @$this->data['page'] = strtolower(@$this->data['page']);
+                if (!file_exists(str_replace("../../.", "", $this->data['page']) . ".php")) {
+                    @$this->data['page'] = Pages . "e404";
+                }
                 $this->NewTitle($page);
                 $this->load->view(Theme . "index", $this->data);
             }

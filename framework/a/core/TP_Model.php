@@ -16,6 +16,13 @@ class TP_Model extends CI_Model {
         parent::__construct($base_url);
     }
 
+    public function isLoginUser() {
+        $islogin = @$this->session->userdata('tp_user');
+        if (gettype($islogin) != 'object') {
+            header("Location: /");
+        }
+    }
+
     public function escape($cadena_entrada) {
         $cadena_salida = "";
         $longitud = strlen($cadena_entrada);
@@ -82,7 +89,9 @@ class TP_Model extends CI_Model {
     }
 
     public function Alert($tipo, $mensaje, $fa_icon) {
-        echo '<div class="alert alert-' . $tipo . '" role=alert> <strong><span class="fa fa-' . $fa_icon . '"></span></strong>' . $mensaje . '.</div>';
+        echo '<div class="alert alert-' . $tipo . '" role=alert><button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button> <strong><span class="fa fa-' . $fa_icon . '"></span></strong>' . $mensaje . '.</div>';
     }
 
     public function CleanSeo($url) {
@@ -109,8 +118,6 @@ class TP_Model extends CI_Model {
     public function UploadImg($base_name, $new_height = 0, $new_width = 0, $path = './files/uploads/') {
         $config['upload_path'] = $path;
         $config['allowed_types'] = 'jpg';
-        $config['max_width'] = 1024;
-        $config['max_height'] = 768;
         $config['overwrite'] = TRUE;
         $config['file_name'] = $base_name . ".jpg";
         $this->upload->initialize($config);

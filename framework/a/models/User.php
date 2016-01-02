@@ -11,7 +11,17 @@
  */
 class User extends TP_Model {
 
+    public function __construct($base_url = null) {
+        parent::__construct($base_url);
+        if (sizeof($_POST) < 1) {
+            header("Location: /");
+        }
+    }
+
     public function Login() {
+        if (gettype($this->isLoginUser()) == 'object') {
+            header("Location: /");
+        }
         if (@$_POST['u_password'] != '' && @$_POST['u_name'] != '') {
             @$_POST['u_password'] = md5(@$_POST['u_password']);
             $query = $this->GetInfoUser($_POST);

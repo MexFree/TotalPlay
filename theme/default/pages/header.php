@@ -26,7 +26,7 @@ Informes coil811122@icloud.com
         <link type="text/css" rel="stylesheet" href="<?= Theme ?>css/main.css" />
 
         <script type="text/javascript" src="<?= Theme ?>js/jquery.min.js"></script>
-        <script type="text/javascript" src="<?= Theme ?>js/main.js"></script>
+        <script type="text/javascript" src="<?= Theme ?>js/main.js?v=<?=  time()?>"></script>
     </head>
     <body>
         <div id="fb-root"></div>
