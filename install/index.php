@@ -1,5 +1,5 @@
 
-<?php $this->load->view(Theme . "header"); ?>
+<?php $this->load->view(Pages . "header"); ?>
 <style>
     body{
         text-align: right;
@@ -89,4 +89,4 @@ if (@$permisos->files > 0 && @$permisos->avatar > 0 && @$permisos->uploads > 0) 
     <?php
 }
 ?>
-<?php $this->load->view(Theme . "footer"); ?>
+<?php $this->load->view(Pages . "footer"); ?>

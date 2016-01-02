@@ -62,7 +62,7 @@ class Panel extends TP_Controller {
                         $seo = implode("-", $seo);
                         $this->data['movie'] = $this->db->query("SELECT *  FROM  `ms_generos`,`ms_peliculas` WHERE `ms_generos`.`g_id` LIKE `ms_peliculas`.`p_genero` AND `ms_peliculas`.`p_seo` LIKE '" . $seo . "' AND `ms_peliculas`.`p_ano` = " . $year);
                         if ($this->data['movie']->num_rows() > 0) {
-                            $this->data['movie']=$this->data['movie']->row();
+                            $this->data['movie'] = $this->data['movie']->row();
                             @$this->data['movie']->p_hits = @$this->data['movie']->p_hits + 1;
                             $this->db->query("UPDATE `ms_peliculas` SET  `p_hits` =  '" . @$this->data['movie']->p_hits . "' WHERE `p_id` =" . @$this->data['movie']->p_id . ";");
                             @$this->data['videos'] = $this->db->query("SELECT *  FROM `ms_videos` WHERE `p_id` = " . $this->data['movie']->p_id . " ORDER BY `v_titulo` ASC ");

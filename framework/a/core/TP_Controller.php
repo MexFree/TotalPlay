@@ -16,7 +16,6 @@ class TP_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->isInstall();
     }
 
     public function NewTitle($page) {
@@ -69,7 +68,8 @@ class TP_Controller extends CI_Controller {
     public function isInstall() {
         if (@$this->db->database == '') {
             if (!defined("Pages")) {
-                define("Pages", "../../../theme/default/pages/");
+                define("Theme", "../../../theme/default/");
+                define("Pages", Theme."pages/");
             }
             @$this->data['config']->w_titulo = "Instalador by xlFederalElk0lx";
             @$this->data['config']->w_url = "http://" . $_SERVER['SERVER_NAME'];
@@ -107,8 +107,9 @@ class TP_Controller extends CI_Controller {
         } else {
             $this->LoadConfigSite();
             $this->isLoginUser();
+            return TRUE;
         }
-        return TRUE;
+        return FALSE;
     }
 
 }
