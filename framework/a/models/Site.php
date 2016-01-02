@@ -22,9 +22,7 @@ class Site extends TP_Model {
     }
 
     public function Webdelete() {
-        if (gettype($this->isLoginUser()) == 'NULL') {
-            header("Location: /");
-        }
+        $this->isLoginUser();
         if ($this->db->query("SELECT *  FROM `ms_links` WHERE `l_id` LIKE '" . @$_POST['l_id'] . "'")->num_rows() > 0) {
             $this->db->query("DELETE FROM `ms_links` WHERE `l_id` = " . @$_POST['l_id'] . ";");
             $this->Alert("success", "web amiga eliminada correctamente", "check-circle");
@@ -35,9 +33,7 @@ class Site extends TP_Model {
     }
 
     public function Webedit() {
-        if (gettype($this->isLoginUser()) == 'NULL') {
-            header("Location: /");
-        }
+        $this->isLoginUser();
         $id = $_POST['l_id'];
         if ($this->db->query("SELECT *  FROM `ms_links` WHERE `l_id` LIKE '" . $id . "'")->num_rows() > 0) {
             $this->db->set($_POST);
@@ -51,9 +47,7 @@ class Site extends TP_Model {
     }
 
     public function Webadd() {
-        if (gettype($this->isLoginUser()) == 'NULL') {
-            header("Location: /");
-        }
+        $this->isLoginUser();
         if (filter_var(@$_POST['l_url'], FILTER_VALIDATE_URL)) {
             if ($this->db->query("SELECT *  FROM `ms_links` WHERE `l_url` LIKE '" . @$_POST['l_url'] . "'")->num_rows() > 0) {
                 $this->Alert("danger", "ya existe una web amiga registrada con esta url", "warning");
@@ -68,9 +62,7 @@ class Site extends TP_Model {
     }
 
     public function Advertising() {
-        if (gettype($this->isLoginUser()) == 'NULL') {
-            header("Location: /");
-        }
+        $this->isLoginUser();
         foreach ($_POST as $key => $value) {
             $isPubli = $this->db->query("SELECT *  FROM `ms_publicidad` WHERE `ad_key` LIKE '" . $key . "'");
             if ($isPubli->num_rows() > 0) {
@@ -84,9 +76,7 @@ class Site extends TP_Model {
     }
 
     public function Update() {
-        if (gettype($this->isLoginUser()) == 'NULL') {
-            header("Location: /");
-        }
+        $this->isLoginUser();
         $id = $_POST['w_id'];
         unset($_POST['w_id']);
         $this->db->set($_POST);

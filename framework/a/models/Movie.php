@@ -14,6 +14,9 @@ class Movie extends TP_Model {
 
     public function __construct($base_url = null) {
         parent::__construct($base_url);
+        if (sizeof($_POST) < 1) {
+            header("Location: /");
+        }
     }
 
     public function Videodelete() {

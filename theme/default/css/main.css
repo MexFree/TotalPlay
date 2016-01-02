@@ -688,7 +688,28 @@ table.dataTable thead tr th{
     min-width: 100%;
     width: 100%;
 }
-
+#footer{
+    min-height: 50px;
+    padding: 10px 0px;
+    text-align: left;
+    color: #7A8293;
+    font-size: 11px;
+}
+#footer .texto{
+    float: left;
+}
+#footer .copyright{
+    float: right;
+}
+#footer a, #footer strong{
+    cursor: pointer;
+    color: #8d9caf;
+    text-decoration: none;
+    font-weight: bold;
+}
+#footer a:hover ,#footer strong:hover{
+    color: #000;
+}
 @media (max-width: 767px) {
     .navbar-default .navbar-nav .open .dropdown-menu > li > a {
         color: #ffffff;
