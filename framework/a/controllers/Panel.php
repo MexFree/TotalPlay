@@ -15,8 +15,14 @@ class Panel extends TP_Controller {
                     @$this->data['page'] = Pages . '404';
                 } else {
                     if (@$page == 'Configuration' || @$page == 'Advertising' || @$page == 'Webs') {
+                        if ($this->data['tp_user'] == '') {
+                            header("Location: /");
+                        }
                         @$this->data['page'] = Modulo . "site/" . $page;
                     } elseif ($page == 'Movies') {
+                        if ($this->data['tp_user'] == '') {
+                            header("Location: /");
+                        }
                         $page = ($this->uri->segment(2) == '') ? "movies" : $this->uri->segment(2);
                         $this->data['movies'] = $this->db->query("SELECT * FROM  `ms_peliculas` ORDER BY `p_titulo` ASC");
                         if ($page == 'Videos') {
