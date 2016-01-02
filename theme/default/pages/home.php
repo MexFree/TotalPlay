@@ -1,3 +1,4 @@
+
 <script type="text/javascript" src="<?= Theme ?>js/jquery.jcarousel.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<?= Theme ?>css/jcarousel.min.css?v=<?= time() ?>" />
 <div class="jumbotron box box-full">
@@ -12,7 +13,7 @@
                 <div class="jcarousel peliculas-<?= date("Y") ?>">
                     <ul>
                         <?php
-                        foreach (@$peliculas2015->result()as $movie) {
+                        foreach (@$peliculas2016->result()as $movie) {
                             ?>
                             <li>
                                 <div class="info">

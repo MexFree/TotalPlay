@@ -16,6 +16,67 @@ class TP_Model extends CI_Model {
         parent::__construct($base_url);
     }
 
+    public function escape($cadena_entrada) {
+        $cadena_salida = "";
+        $longitud = strlen($cadena_entrada);
+        for ($cuenta = 0; $cuenta < $longitud; $cuenta++) {
+            $cadena_salida.="%" . dechex(ord(substr($cadena_entrada, $cuenta, 1)));
+        }
+        return $cadena_salida;
+    }
+
+    public function Jsonencode($str) {
+        return str_replace(array('"', "\\\'"), array("'", "\\'"), json_encode($str));
+    }
+
+    public function character_limiter($str, $limit = 76, $end = '...') {
+        if ($limit > strlen($str)) {
+            return ucfirst($str);
+        } else {
+            $str = str_split($str);
+            $cadena = '';
+            for ($i = 0; $i < $limit; $i++) {
+                $cadena.=$str[$i];
+            }
+            return ucfirst($cadena . $end);
+        }
+    }
+
+    public function Paginacion($uri = 2, $search = array(), $limit = 30) {
+        $this->load->library('pagination');
+        $config['uri_segment'] = $uri;
+        if (sizeof($search) > 0) {
+            $config['base_url'] = "http://" . $_SERVER['HTTP_HOST'] . "/" . $this->uri->segment(1) . "/" . $this->uri->segment(2) . '/';
+            foreach ($search as $key => $value) {
+                $config['total_rows'] = $this->db->query("select * from ms_peliculas where " . $key . " like '%" . $value . "%'")->num_rows();
+            }
+        } else {
+            $config['base_url'] = '/page/';
+            $config['total_rows'] = $this->db->query("select * from ms_peliculas")->num_rows();
+        }
+        $config['per_page'] = $limit;
+        $config['use_page_numbers'] = TRUE;
+        $config['num_links'] = 3;
+        $config['next_link'] = false;
+        $config['prev_link'] = false;
+        $this->pagination->initialize($config);
+        echo $this->pagination->create_links();
+    }
+
+    public function unescape($cadena_entrada) {
+        $cadena_salida = "";
+        $longitud = strlen($cadena_entrada);
+        if (($longitud % 3) == 0) {
+            for ($cuenta = 0; $cuenta < $longitud; $cuenta+=3) {
+                $cadena_salida.=chr(hexdec(substr($cadena_entrada, $cuenta + 1, 2)));
+            }
+
+            return $cadena_salida;
+        } else {
+            return "Cadena no valida";
+        }
+    }
+
     public function JS($codigo) {
         echo "<script>" . $codigo . "</script>";
     }

@@ -16,7 +16,7 @@ class TP_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        //$this->isInstall();
+        $this->isInstall();
     }
 
     public function NewTitle($page) {

@@ -121,7 +121,9 @@ legend{
 .main .margin6em{
     margin-top: 6em;
 }
-
+.main .margin2em{
+    margin-top: 2em;
+}
 .main .box-full{
     padding: 15px 0px 0px 0px;
 }
@@ -209,7 +211,7 @@ legend{
 }
 .categoria .btn{
     font-size: 12px;
-    min-width: 91px;
+    min-width: 86px;
     text-align: center;
     padding: 5px 2px;
     margin-top: 0px;
@@ -222,7 +224,7 @@ legend{
 .main .box .col-right{
     padding: 0px;
 }
-.main .box .col-right h3{
+.main .box .col-right h3,.title_cat{
     margin: 15px;
     font-weight: 600;
     font-size: 15px;
@@ -501,6 +503,92 @@ table.dataTable thead tr th{
     background: rgba(0, 0, 0, .47);
     color: #fff;
 }
+
+/* Inicio ver pelicula */
+.ver{
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.ver .col-sm-left{
+    padding: 0px;
+}
+.ver .col-sm-left img{
+    width: 100%;
+}
+.ver .col-sm-right h1{
+    font-size: 22px;
+    line-height: 30px;
+    font-weight: 300;
+    color: #FFF;
+    overflow: hidden;
+    margin: 0px;
+}
+.ver .col-sm-right a{
+    font-size: 11px;
+    text-decoration: none;
+    color: #fff;
+    padding: 2px 5px;
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+.ver .col-sm-right .year{
+    color: #739cc5;
+}
+.ver .col-sm-right .data{
+    padding: 0px 0px 7px 0px;
+    border-bottom: 1px solid #000;
+    margin-bottom: 6px;
+    color: #fff;
+    font-size: 13px;
+    text-transform: capitalize;
+    vertical-align: top;
+}
+.ver .col-sm-right .data:first-child,
+.ver .col-sm-right .data:first-of-type{
+    padding-top: 1em;
+}
+.ver .col-sm-right .data:last-child,
+.ver .col-sm-right .data:last-of-type{
+    font-size: 12px;
+    text-align: justify;
+    color: #9198AB;
+    margin-bottom: 0px;
+    border-bottom: none;
+}
+.ver .col-sm-right .data .fa{
+    padding: 4px;
+    background: #000;
+    border-radius: 3px;
+    color: #7A8293;
+    margin-right: 10px;
+    min-width: 23px;
+    text-align: center;
+}
+.ver .col-sm-right .data strong{
+    color: #9198AB;
+}
+.row .box-full{
+    padding: 0px 0px 15px 0px;
+}
+.opciones .nav-tabs li{
+    margin: 0px;
+    border-right: 1px solid #000;
+    text-transform: capitalize;
+}
+.opciones .nav-tabs li:last-child{
+    border-right: none;
+}
+.opciones .nav-tabs li a{
+    padding: 5px 10px;
+}
+.opciones .tab-content{
+    padding: 0px;
+    text-align: center;
+}
+.btn-share{
+    margin-top: 0px;
+    margin-bottom: 1em;
+}
+/* Fin ver pelicula */
 
 .navbar-default {
     background: #262b36;

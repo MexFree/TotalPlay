@@ -128,4 +128,8 @@ class Movie extends TP_Model {
         }
     }
 
+    public function Remote(){
+        $_POST['datos']=  json_decode(base64_decode($_POST['datos']));
+        print_r(@$_POST['datos']);
+    }
 }
