@@ -26,20 +26,24 @@ CREATE TABLE IF NOT EXISTS `ms_generos` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15 ;
 --------------------------------------------------------
 INSERT INTO `ms_generos` (`g_id`, `g_nombre`, `g_seo`) VALUES
-(1, 'Accion', 'accion'),
-(2, 'Animacion', 'animacion'),
+(1, 'Acción', 'accion'),
+(2, 'Animación', 'animacion'),
 (3, 'Aventura', 'aventura'),
-(4, 'Ciencia Ficcion', 'ciencia-ficcion'),
+(4, 'Ciencia ficción', 'ciencia-ficcion'),
 (5, 'Comedia', 'comedia'),
-(6, 'Deporte', 'deporte'),
-(7, 'Drama', 'drama'),
-(8, 'Fantasia', 'fantasia'),
-(9, 'Infantil', 'infantil'),
-(10, 'Musical', 'musical'),
-(11, 'Romance', 'romance'),
-(12, 'Suspenso', 'suspenso'),
-(13, 'Terror', 'terror'),
-(14, 'Series', 'series');
+(6, 'Crimen', 'crimen'),
+(7, 'Documental', 'documental'),
+(8, 'Drama', 'drama'),
+(9, 'Familia', 'familia'),
+(10, 'Fantasía', 'fantasia'),
+(11, 'Guerra', 'guerra'),
+(12, 'Historia', 'historia'),
+(13, 'Misterio', 'misterio'),
+(14, 'Música', 'musica'),
+(15, 'Romance', 'romance'),
+(16, 'Suspenso', 'suspenso'),
+(17, 'Terror', 'terror'),
+(18, 'Western', 'western');
 --------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `ms_links` (
   `l_id` int(11) NOT NULL AUTO_INCREMENT,
