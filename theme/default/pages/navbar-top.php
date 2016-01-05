@@ -14,7 +14,7 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-
+                <li><a href="/">Inicio</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="https://binbox.io/H4bBF" target="_blank"><span class="fa fa-github-square"></span>Descargar Repositorio</a></li>
@@ -66,6 +66,16 @@
                     <?php
                 }
                 ?>
+                <li class="dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        <span class="fa fa-cubes"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-share">
+                        <a class="btn btn-primary btn-block btn-share" href="https://www.facebook.com/Totalplay.es" target="_blank"><span class="fa fa-facebook-square"></span>Facebook</a>
+                        <a class="btn btn-info btn-block btn-share"  href="https://twitter.com/totalplayes" target="_blank"><span class="fa fa-twitter-square"></span>Twitter</a>
+                        <a class="btn btn-danger btn-block btn-share"  href="https://plus.google.com/" target="_blank"><span class="fa fa-google-plus"></span>Google +</a>
+                    </div>
+                </li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

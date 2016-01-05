@@ -670,6 +670,15 @@ table.dataTable thead tr th{
     background-color: #000;
 }
 
+.dropdown-menu-share{
+    padding: 10px;
+}
+
+.dropdown-menu-share .btn{
+    margin: 0px;
+    margin-top: 5px;
+}
+
 .dropdown-login{
     min-width: 200px;
     padding: 10px;
