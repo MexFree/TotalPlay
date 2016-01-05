@@ -127,7 +127,10 @@ legend{
 .main .box-full{
     padding: 15px 0px 0px 0px;
 }
-
+.main .box-transparent{
+    background: transparent;
+    box-shadow: none;
+}
 .main .box-admin{
     margin: auto;
     margin-top: 50px;

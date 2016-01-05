@@ -1,4 +1,6 @@
 
+<script type="text/javascript" src="<?= Theme ?>js/jquery.jcarousel.min.js"></script>
+<link type="text/css" rel="stylesheet" href="<?= Theme ?>css/jcarousel.min.css" />
 <div class="row margin2em">
     <div class="col-sm-9 col-left">
         <div class="jumbotron box">
@@ -84,13 +86,44 @@
         </div>
     </div>
 </div>
+<div class="jumbotron box box-full box-transparent">
+    <div class="movie-tabs">
+        <div class="contents">
+            <div class="tab active" id="estrenos">
+                <h3>Peliculas Relacionadas</h3>
+                <div class="controles">
+                    <button class="btn btn-inverse btn-sm relacionadas-prev"><span class="fa fa-chevron-left"></span></button>
+                    <button class="btn btn-inverse btn-sm relacionadas-next"><span class="fa fa-chevron-right"></span></button>
+                </div>
+                <div class="jcarousel relacionadas">
+                    <ul>
+                        <?php
+                        foreach (@$relacionadas->result()as $movie) {
+                            ?>
+                            <li>
+                                <div class="info">
+                                    <a href="/ver/<?= $movie->p_seo ?>-<?= $movie->p_ano ?>-online.html"><img src="/files/uploads/<?= $movie->p_id ?>.jpg" /></a>
+                                    <h5><?= $this->Master->character_limiter($movie->p_titulo, 18, '') ?></h5>
+                                    <span><?= $movie->p_ano ?></span>
+                                </div>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(function () {
+        TotalPlay.CreateJCarousel('relacionadas');
         $(".btn-votos").click(function () {
-            TotalPlay.Post("movie_like", {id:<?= $movie->p_id ?>},"api-movie");
+            TotalPlay.Post("movie_like", {id:<?= $movie->p_id ?>}, "api-movie");
         });
         $(".btn-report").click(function () {
-            TotalPlay.Post("movie_report", {id:<?= $movie->p_id ?>},"api-movie");
+            TotalPlay.Post("movie_report", {id:<?= $movie->p_id ?>}, "api-movie");
         });
         $(".source").click(function () {
             var source = unescape($(this).data("key"));

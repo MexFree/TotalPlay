@@ -76,6 +76,7 @@ class Panel extends TP_Controller {
                             @$this->data['config']->w_titulo = ucwords(@$this->data['movie']->p_titulo) . " - " . @$this->data['config']->w_site_name;
                             @$this->data['config']->w_descripcion = @$this->data['movie']->p_sinopsis;
                             @$this->data['config']->w_url.="/ver/" . $this->data['movie']->p_seo . "-" . $this->data['movie']->p_ano . "-online.html";
+                            $this->data['relacionadas'] = $this->db->query("SELECT * FROM `ms_peliculas` where p_genero = ".$this->data['movie']->p_genero." ORDER BY RAND() LIMIT 30");
                         } else {
                             @$this->data['page'] = Pages . "e404";
                         }
