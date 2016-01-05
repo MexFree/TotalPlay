@@ -12,7 +12,7 @@ class Panel extends TP_Controller {
             } else {
                 @$this->data['page'] = Pages . $page;
                 if (@$this->data['config']->w_offline > 0) {
-                    @$this->data['page'] = Pages . '404';
+                    @$this->data['page'] = Pages . 'offline';
                 } else {
                     if (@$page == 'Configuration' || @$page == 'Advertising' || @$page == 'Webs') {
                         if ($this->data['tp_user'] == '') {

@@ -17,6 +17,7 @@
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://binbox.io/H4bBF" target="_blank"><span class="fa fa-github-square"></span>Descargar Repositorio</a></li>
                 <?php
                 if (@$tp_user->u_hash != '') {
                     ?>
