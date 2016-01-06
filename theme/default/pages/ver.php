@@ -129,5 +129,8 @@
             var source = unescape($(this).data("key"));
             $("#player").html(source);
         });
+        setTimeout(function () {
+            $(".source")[0].click();
+        }, 5000);
     });
 </script>
