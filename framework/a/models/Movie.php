@@ -120,7 +120,7 @@ class Movie extends TP_Model {
         }
         @$_POST['p_seo'] = $this->CleanSeo($_POST['p_titulo']);
         @$_POST['p_date'] = time();
-        $AUTO_INCREMENT = @$this->db->query("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='totalpla_moviescript' and TABLE_NAME='ms_peliculas'")->row()->AUTO_INCREMENT;
+        $AUTO_INCREMENT = @$this->db->query("select AUTO_INCREMENT from information_schema.TABLES where TABLE_SCHEMA='cambio_database' and TABLE_NAME='ms_peliculas'")->row()->AUTO_INCREMENT;
         if ($AUTO_INCREMENT < 1) {
             $this->Alert("danger", 'lo sentimos ocurrio un error al obtener un id', "warning");
         } else {

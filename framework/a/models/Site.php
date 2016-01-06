@@ -180,7 +180,12 @@ class Site extends TP_Model {
             $txt = str_replace($a, $b, $txt);
             if (write_file("./framework/a/config/database.php", $txt)) {
                 $this->Alert("success", "archivo de configuracion de la base de datos modificado", "check-circle");
-                return $this->CreateTablesDB();
+                $txt = str_replace("cambio_database", @$_POST['db_name'], read_file("./framework/a/models/Movie.php"));
+                if (write_file("./framework/a/models/Movie.php", $txt)) {
+                    return $this->CreateTablesDB();
+                } else {
+                    $this->Alert("danger", "error al escribir en contraldor de acciones de peliculas", "warning");
+                }
             } else {
                 $this->Alert("danger", "verifica que el archivo <strong>/framework/a/config/database.php</strong> tenga permisos: 666, o que exista", "warning");
             }
