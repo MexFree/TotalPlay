@@ -24,7 +24,6 @@ $(function () {
 
     }
 });
-
 var Site = {
     WebEdit: function (id, name, url, online) {
         $("#l_name").val(name);
@@ -121,6 +120,23 @@ var Movie = {
 }
 
 var TotalPlay = {
+    VerPelicula: function (id) {
+        TotalPlay.CreateJCarousel('relacionadas');
+        $(".btn-votos").click(function () {
+            TotalPlay.Post("movie_like", {id: id}, "api-movie");
+        });
+        $(".btn-report").click(function () {
+            TotalPlay.Post("movie_report", {id: id}, "api-movie");
+        });
+        $(".source").click(function () {
+            var source = unescape($(this).data("key"));
+            $("#player").html(source);
+            $("#player iframe").css("width","100%");
+        });
+        setTimeout(function () {
+            $(".source")[0].click();
+        }, 5000);
+    },
     CreateJCarousel: function (name) {
         $('.' + name).jcarousel({
             wrap: 'circular'
@@ -128,7 +144,6 @@ var TotalPlay = {
         $('.' + name + '-prev').jcarouselControl({
             target: '-=2'
         });
-
         $('.' + name + '-next').jcarouselControl({
             target: '+=2'
         });

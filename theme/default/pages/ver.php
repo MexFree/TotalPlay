@@ -118,19 +118,6 @@
 </div>
 <script>
     $(function () {
-        TotalPlay.CreateJCarousel('relacionadas');
-        $(".btn-votos").click(function () {
-            TotalPlay.Post("movie_like", {id:<?= $movie->p_id ?>}, "api-movie");
-        });
-        $(".btn-report").click(function () {
-            TotalPlay.Post("movie_report", {id:<?= $movie->p_id ?>}, "api-movie");
-        });
-        $(".source").click(function () {
-            var source = unescape($(this).data("key"));
-            $("#player").html(source);
-        });
-        setTimeout(function () {
-            $(".source")[0].click();
-        }, 5000);
+        TotalPlay.VerPelicula(<?= $movie->p_id ?>);
     });
 </script>

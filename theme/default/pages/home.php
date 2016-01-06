@@ -136,7 +136,7 @@
             </div>
             <h3>Facebook</h3>
             <center>
-                <fb:like-box href="https://www.facebook.com/Totalplay.es" width="200" height="630" show_faces="true" border_color="#d7ebf9" stream="false" header="false"></fb:like-box>
+                <fb:like-box href="<?= @$publicidad['fb'] ?>" width="200" height="630" show_faces="true" border_color="#d7ebf9" stream="false" header="false"></fb:like-box>
             </center>
         </div>
     </div>
