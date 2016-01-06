@@ -1,13 +1,9 @@
 # TotalPlay
-Sistema web para montar una pagina de peliculas online, basado en la base de datos de MovieScript, y utilizando como framework CodeIgniter.
+Bueno este es un proyecto destinado para poder gestionar e implentar una web con tematica de peliculas, la base principal del gestor sera el Framework CodeIgniter y como Framework css sera Bootstrap con la finalidad de hacerlo responsive y adaptable para cualquier dispositivo.
 
-Para los interesados en descargar MovieScript dejo la url del autor original, este sistema tendra como finalidad ser compatible con el del autor.
+El sistema se compondra y se progamara por modulos, se iran colocando los modulos o nombre de los modulos de acuerdo como se vayan programando
 
-http://www.marcofbb.com.ar/movie-script-crea-tu-web-de-peliculas-online/
-
-Por lo regular realizare avances por la noche todos los dias se sincronizaran con este repositorio.
-
-Se aceptan sugerencias.
+ara los interesados de este proyecto les agradeceria sus comentarios y sugerencias conforme se vayan haciendos los progresos para sus mejoras y modificaciones, la pagina oficial donde se podran discutir sobre el sera
 
 Demo: http://www.totalplay.es/
 Usuario: xlfederalelk0lx
