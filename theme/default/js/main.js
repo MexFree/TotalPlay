@@ -25,14 +25,35 @@ $(function () {
     }
 });
 var Site = {
+    TableWebs: function () {
+        $("#movie_table").dataTable({
+            'searching': true,
+            "order": [[1, "asc"]],
+            stateSave: true
+        });
+        $(".paginate_button_add").click(function () {
+            $(".page-header").html("Agregar web");
+            $(".listado").hide("slow", function () {
+                $("#fg").show("slow");
+                $("#fg").data("api", "site_webadd");
+                $("input")[0].focus();
+            });
+        });
+        $(".btn-danger").click(function () {
+            location.reload();
+        });
+    },
     WebEdit: function (id, name, url, online) {
-        $("#l_name").val(name);
-        $("#l_url").val(unescape(url));
-        $("#l_online").val(online);
-        $("#l_id").val(id);
-        $("#fg").data("api", "site_webedit");
-        $(".btn-inverse").html("Actualizar");
-        $(".btn-danger").css("display", "inline-block");
+        $(".listado").hide("slow", function () {
+            $("#l_name").val(name);
+            $("#l_url").val(unescape(url));
+            $("#l_online").val(online);
+            $("#l_id").val(id);
+            $("#fg").show("slow");
+            $("#fg").data("api", "site_webedit");
+            $(".btn-inverse").html("Actualizar");
+            $("input")[0].focus();
+        });
     },
     WebDelete: function (id) {
         $("#fg").html('<input type="hidden" name="l_id" value="' + id + '" />');
@@ -131,7 +152,7 @@ var TotalPlay = {
         $(".source").click(function () {
             var source = unescape($(this).data("key"));
             $("#player").html(source);
-            $("#player iframe").css("width","100%");
+            $("#player iframe").css("width", "100%");
         });
         setTimeout(function () {
             $(".source")[0].click();

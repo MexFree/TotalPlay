@@ -54,7 +54,6 @@ class Site extends TP_Model {
             } else {
                 $this->db->insert("ms_links", $_POST);
                 $this->Alert("success", "web amiga agregada", "check-circle");
-                $this->JS("location.reload();");
             }
         } else {
             $this->Alert("danger", "url invalida", "warning");
